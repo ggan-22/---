@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shower Care - Ritual Complete</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#74d5e1",
+                        "primary": "#006972",
+                        "on-tertiary-fixed-variant": "#2f4b51",
+                        "primary-fixed": "#91f1fe",
+                        "outline-variant": "#bdc9ca",
+                        "inverse-primary": "#74d5e1",
+                        "on-secondary-fixed": "#181d1b",
+                        "on-surface": "#111c2d",
+                        "on-tertiary-container": "#223f45",
+                        "tertiary-container": "#8caab1",
+                        "on-primary-fixed": "#001f23",
+                        "surface-container-high": "#dee8ff",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#dfe3e1",
+                        "primary-container": "#4fb3bf",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#004248",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "inverse-surface": "#263143",
+                        "secondary-fixed-dim": "#c3c7c5",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed": "#c9e8ef",
+                        "on-primary-fixed-variant": "#004f56",
+                        "tertiary": "#466369",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#d8e3fb",
+                        "surface": "#f9f9ff",
+                        "surface-dim": "#cfdaf2",
+                        "on-primary": "#ffffff",
+                        "on-background": "#111c2d",
+                        "on-error": "#ffffff",
+                        "outline": "#6e797b",
+                        "on-tertiary-fixed": "#001f25",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#d8e3fb",
+                        "on-secondary-fixed-variant": "#434846",
+                        "on-surface-variant": "#3e494a",
+                        "surface-tint": "#006972",
+                        "background": "#f9f9ff",
+                        "secondary-container": "#dadedb",
+                        "on-secondary-container": "#5d6260",
+                        "tertiary-fixed-dim": "#adccd3",
+                        "secondary": "#5b5f5d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "24px",
+                        "stack-sm": "8px",
+                        "container-margin": "24px",
+                        "stack-md": "16px",
+                        "section-gap": "48px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-timer": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-timer": ["80px", { "lineHeight": "96px", "letterSpacing": "-0.04em", "fontWeight": "300" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        @keyframes fillProgress {
+            from { width: 0%; }
+        }
+        .animate-progress-fill {
+            animation: fillProgress 1s ease-out forwards;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md antialiased pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-surface-dim/60 backdrop-blur-xl shadow-[0px_12px_32px_rgba(30,41,59,0.04)] flex items-center justify-between px-container-margin h-16 transition-all duration-300 ease-in-out text-primary dark:text-primary-fixed-dim">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">spa</span>
+<span class="font-headline-md text-headline-md tracking-tight">Shower Care</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-container-margin py-section-gap w-full max-w-lg mx-auto">
+<!-- Ritual Complete Header -->
+<div class="flex flex-col items-center justify-center text-center mb-section-gap w-full mx-auto">
+  <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-stack-sm w-full">
+    샤워 루틴 완료
+  </h1>
+  <p id="showerMessage" class="font-body-lg text-body-lg text-on-surface-variant max-w-[85%] mx-auto opacity-90 leading-relaxed drop-shadow-sm">
+    오늘의 샤워 시간을 계산하고 있어요...
+  </p>
+</div>
+<!-- Visual Comparison Card -->
+<div class="w-full bg-surface-container-lowest rounded-[24px] shadow-[0px_12px_32px_rgba(30,41,59,0.04)] p-card-padding mb-section-gap flex flex-col gap-stack-md">
+<!-- Actual Time -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-on-surface-variant">실제 샤워 시간</span>
+<span id="measuredTime" class="font-headline-md text-headline-md text-primary">00:00</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 overflow-hidden">
+  <div id="progressBar" class="h-full bg-tertiary-container rounded-full opacity-80 transition-all duration-500 ease-out" style="width: 0%;"></div>
+</div>
+</div>
+<!-- Recommended Time -->
+<div class="flex flex-col gap-2 mt-stack-sm">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-on-surface-variant">목표 샤워 시간</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant">8:00</span>
+</div>
+<div class="w-full h-3 bg-surface-variant rounded-full overflow-hidden">
+<div class="w-full bg-surface-container rounded-full h-3 overflow-hidden">
+  <div id="progressBar" class="h-full bg-tertiary-container rounded-full opacity-80 transition-all duration-500 ease-out" style="width: 0%;"></div>
+</div>
+</div>
+<!-- Soft Encouragement -->
+<div class="mt-stack-md pt-stack-md border-t border-surface-variant/50 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant italic">"A mindful session. Your skin is well-hydrated."</p>
+</div>
+</div>
+<!-- Action Area -->
+<div class="w-full flex flex-col gap-stack-md items-center">
+<a href="post_shower_skin_check_in.html" class="w-full h-[56px] bg-primary-container text-on-primary font-body-lg text-body-lg rounded-[16px] flex items-center justify-center gap-2 shadow-[0px_12px_32px_rgba(30,41,59,0.04)] hover:opacity-90 active:scale-[0.98] transition-all duration-200 cursor-pointer">
+  <span class="">샤워 후 피부 상태 기록하기</span>
+  <span class="material-symbols-outlined text-[20px]">water_drop</span>
+</a>
+<a href="enhanced_home_measurement_standby_update_motion.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors py-2 px-4 cursor-pointer inline-block text-center">
+  지금은 건너뛰기
+</a>
+</div>
+</main>
+<!-- Web Desktop Navigation (Hidden on Mobile) -->
+<nav class="fixed top-0 right-0 z-50 h-16 hidden md:flex items-center gap-8 pr-container-margin bg-transparent text-on-surface-variant">
+<div class="flex items-center gap-2 text-primary cursor-pointer hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-[20px]" data-weight="fill">home</span><span class="font-body-md text-body-md font-medium">Home</span></div>
+<div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="font-body-md text-body-md">History</span>
+</div>
+<div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">Settings</span></div>
+</nav>
+<script src="./screen-bridge.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const messageElement = document.getElementById('showerMessage');
+    if (!messageElement) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const totalSeconds = parseInt(urlParams.get('time')) || 480;
+
+    function getMessageByTime(seconds) {
+      if (seconds < 300) { 
+
+        return "빠르고 산뜻하게 샤워를 마쳤어요. 개운한 하루 되세요!";
+      } else if (seconds <= 480) { 
+        return "딱 적당하고 건강한 샤워 시간이었어요. 피부가 촉촉해요!";
+      } else if (seconds <= 900) { 
+        return "오늘은 조금 길게 샤워했어요. 깊은 휴식에 딱 좋아요.";
+      } else { 
+        return "긴 샤워로 피부가 건조해질 수 있어요. 보습제를 꼼꼼히 발라주세요!";
+      }
+    }
+
+    messageElement.textContent = getMessageByTime(totalSeconds);
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const timeElement = document.getElementById('measuredTime');
+    if (!timeElement) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const totalSeconds = parseInt(urlParams.get('time'), 10) || 0;
+
+    const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const secs = String(totalSeconds % 60).padStart(2, '0');
+
+    timeElement.textContent = `${mins}:${secs}`;
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const progressBar = document.getElementById('progressBar');
+    if (!progressBar) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let rawTime = urlParams.get('time');
+
+    if (rawTime === null || rawTime === undefined || rawTime === 'undefined') {
+      rawTime = sessionStorage.getItem('shower_time');
+    }
+
+    const totalSeconds = parseInt(rawTime, 10) || 0;
+
+    const TARGET_SECONDS = 8; 
+
+    let percentage = (totalSeconds / TARGET_SECONDS) * 100;
+    if (percentage > 100) percentage = 100;
+    if (percentage < 0) percentage = 0;
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        progressBar.style.width = `${percentage.toFixed(1)}%`;
+      }, 50);
+    });
+  });
+</script></body></html>

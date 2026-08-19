@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>샤워 케어</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f9f9ff; font-family: Pretendard, Arial, sans-serif; }
+    .screen { display: none; width: 100%; height: 100dvh; overflow: hidden; opacity: 0; transform: translateY(10px); transition: opacity .3s ease, transform .3s ease; }
+    .screen.is-active { display: block; opacity: 1; transform: translateY(0); }
+    iframe { border: 0; width: 100%; height: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <section class="screen is-active" data-screen="welcome"><iframe title="환영" src="welcome_to_shower_care.html"></iframe></section>
+  <section class="screen" data-screen="concerns"><iframe title="피부 고민 선택" src="skin_concern_selection_updated.html"></iframe></section>
+  <section class="screen" data-screen="permission"><iframe title="마이크 권한" src="animated_microphone_permission.html"></iframe></section>
+  <section class="screen" data-screen="denied"><iframe title="마이크 권한 거부" src="microphone_permission_denied.html"></iframe></section>
+  <section class="screen" data-screen="home"><iframe title="홈" src="enhanced_home_measurement_standby_update_motion.html"></iframe></section>
+  <section class="screen" data-screen="active"><iframe title="감지 중" src="active_detection_state.html"></iframe></section>
+  <section class="screen" data-screen="reached"><iframe title="목표 달성" src="target_reached_state.html"></iframe></section>
+  <section class="screen" data-screen="summary"><iframe title="샤워 결과" src="refined_shower_result_summary.html"></iframe></section>
+  <section class="screen" data-screen="checkin"><iframe title="샤워 후 피부 상태" src="post_shower_skin_check_in.html"></iframe></section>
+  <section class="screen" data-screen="recommendation"><iframe title="Pith 케어 추천" src="pith_care_recommendation.html"></iframe></section>
+  <script>
+    const order = ['welcome', 'concerns', 'permission', 'denied', 'home', 'active', 'reached', 'summary', 'checkin', 'recommendation'];
+    const TARGET_SECONDS = 8 * 60;
+    let stream, audioContext, analyser, detectorId, timerId, targetId, sessionStartedAt;
+    const labels = new Map([
+      ['Get Started', '시작하기'], ['Any skin concerns today?', '오늘 피부 고민이 있나요?'], ['Select all that apply.', '해당하는 항목을 모두 선택하세요.'],
+      ['Dryness', '건조함'], ['Tightness', '당김'], ['Sensitivity', '민감함'], ['Redness', '붉어짐'], ['Acne', '트러블'], ['Dullness', '칙칙함'], ['Continue', '계속하기'],
+      ['Allow Microphone Access', '마이크 접근 허용'], ['Start Shower', '샤워 시작'], ['Demo mode · tap to simulate', '데모 모드 · 탭하여 시뮬레이션'],
+      ['Shower Care listens to water sounds to track your duration. Audio is processed locally and is never recorded or stored.', '샤워 시간을 기록하기 위해 물소리만 감지합니다. 소리는 기기에서만 처리되며 녹음하거나 저장하지 않습니다.'],
+      ['Allow water detection', '물소리 감지를 허용해 주세요'], ['Not now', '나중에 하기'], ['Automatic tracking is paused', '자동 기록이 일시 중지되었어요'], ['Shower Care needs microphone access to listen for water sounds and track your ritual. You can enable this anytime in your device settings.', '물소리를 감지하고 샤워 루틴을 기록하려면 마이크 권한이 필요합니다. 기기 설정에서 언제든 허용할 수 있어요.'], ['Open Settings', '설정 열기'], ['Try Again', '다시 시도'],
+      ['Home', '홈'], ['History', '기록'], ['Settings', '설정'], ['Listening to water...', '물소리를 감지하고 있어요...'], ['Ritual Complete', '샤워 루틴 완료'],
+      ['A longer ritual today—perfect for a deep reset.', '오늘은 조금 길게 샤워했어요. 깊은 휴식에 딱 좋아요.'], ['Actual Session', '실제 샤워 시간'], ['Intended Ritual', '목표 샤워 시간'], ['"A mindful session. Your skin is well-hydrated."', '"마음을 돌보는 시간이었어요. 피부가 촉촉하게 유지되고 있어요."'], ['Log how my skin feels', '샤워 후 피부 상태 기록하기'],
+      ['Tight', '당김'], ['Dry', '건조함'], ['Sensitive', '민감함'], ['Itchy', '가려움'], ['Normal', '보통'], ['Great', '매우 좋아요'],
+      ['How does your skin feel right now?', '지금 피부 상태는 어떤가요?'], ['Save', '저장하기'], ['Skip', '건너뛰기'],
+      ['Pith Skincare Regimen', 'Pith 스킨케어 루틴'], ['Aura Hydrator', '아우라 하이드레이터'], ['Silk Cleanser', '실크 클렌저'], ['Calm Serum', '카밍 세럼'], ['Deeply nourishes and locks in moisture after hot water exposure.', '따뜻한 물에 노출된 뒤 피부에 영양과 수분을 채워주세요.'], ['Gently removes impurities while maintaining the skin\'s delicate barrier.', '피부 장벽은 지키면서 노폐물을 부드럽게 씻어냅니다.'], ['Soothes sensitivity and reduces redness induced by heat.', '열로 인한 민감함과 붉어짐을 편안하게 진정시켜 줍니다.'], ['Gentle Habits', '부드러운 케어 습관'], ['Pat skin dry gently with a soft towel; avoid rubbing.', '부드러운 수건으로 톡톡 두드려 말리고, 문지르지 마세요.'], ['Apply moisturizer while skin is still damp to seal in hydration.', '피부가 촉촉할 때 보습제를 발라 수분을 지켜주세요.'], ['Repeated Concerns?', '고민이 반복되나요?'], ['See DERNA clinic consultation info.', 'DERNA 클리닉 상담 정보를 확인해 보세요.'], ['These are wellness suggestions, not medical advice.', '이 내용은 웰니스 제안이며 의학적 조언이 아닙니다.']
+    ]);
+    function localize(doc) {
+      const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+      const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => { const key = node.nodeValue.trim(); if (labels.has(key)) node.nodeValue = node.nodeValue.replace(key, labels.get(key)); });
+      doc.documentElement.lang = 'ko';
+      doc.body.style.fontFamily = "Pretendard, 'Plus Jakarta Sans', sans-serif";
+    }
+    function show(name) {
+      document.querySelectorAll('.screen').forEach(section => section.classList.toggle('is-active', section.dataset.screen === name));
+      history.replaceState(null, '', '#' + name);
+      if (name !== 'active') stopTimer();
+    }
+    function next(current) { const i = order.indexOf(current); if (i < order.length - 1) show(order[i + 1]); }
+function stopTimer() { 
+  if (timerId) { clearInterval(timerId); timerId = null; }
+  if (detectorId) { clearInterval(detectorId); detectorId = null; }
+  if (targetId) { clearTimeout(targetId); targetId = null; }
+}
+
+function startShowerTimer() {
+
+  stopTimer();
+
+  sessionStartedAt = Date.now();
+  show('active');
+
+  const timer = document.querySelector('[data-screen="active"] iframe').contentDocument?.querySelector('h1');
+  
+  const tick = () => {
+    const elapsed = Math.floor((Date.now() - sessionStartedAt) / 1000);
+
+    sessionStorage.setItem('shower_time', elapsed);
+
+    if (timer) timer.textContent = formatTime(elapsed);
+  };
+
+  tick();
+  timerId = setInterval(tick, 1000);
+  targetId = setTimeout(() => show('reached'), TARGET_SECONDS * 1000);
+}
+    function startWaterDetection() {
+      if (!stream) return;
+      clearInterval(detectorId);
+      audioContext = new AudioContext();
+      const source = audioContext.createMediaStreamSource(stream);
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 2048;
+      analyser.smoothingTimeConstant = 0.75;
+      source.connect(analyser);
+      const frequency = new Uint8Array(analyser.frequencyBinCount);
+      let detectedFrames = 0;
+      updateHomeStatus('물소리를 감지하고 있어요…');
+      detectorId = setInterval(() => {
+        analyser.getByteFrequencyData(frequency);
+        const start = Math.floor(250 / (audioContext.sampleRate / analyser.fftSize));
+        const end = Math.min(frequency.length, Math.ceil(5000 / (audioContext.sampleRate / analyser.fftSize)));
+        let sum = 0, activeBands = 0;
+        for (let i = start; i < end; i++) { sum += frequency[i]; if (frequency[i] > 24) activeBands++; }
+        const average = sum / Math.max(1, end - start);
+        const spread = activeBands / Math.max(1, end - start);
+        const isWaterLike = average > 18 && spread > 0.18;
+        detectedFrames = isWaterLike ? detectedFrames + 1 : Math.max(0, detectedFrames - 1);
+        if (detectedFrames >= 6) startShowerTimer();
+      }, 250);
+    }
+    async function requestMicrophone() {
+
+  stopTimer();
+  
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ 
+      audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } 
+    });
+    show('home');
+    startWaterDetection();
+  } catch (error) {
+    console.warn('마이크 접근 거부 또는 에러:', error);
+    stopTimer();
+    show('denied');
+  }
+}
+    function handleAction(screen, control) {
+      const text = (control.text || '').toLowerCase();
+      const className = control.className || '';
+      if (screen === 'welcome') return show('concerns');
+      if (screen === 'concerns') {
+        if (control.id === 'continueBtn') show('permission');
+        return;
+      }
+      if (screen === 'permission') {
+        if (control.buttonIndex === 0) return show('concerns');
+        if (control.buttonIndex === 1 || text.includes('allow microphone') || text.includes('마이크 접근')) return requestMicrophone();
+        return show('denied');
+      }
+      if (screen === 'denied') {
+          stopTimer();
+          if (control.buttonIndex === 0) return show('permission');
+          if (control.buttonIndex === 2 || text.includes('try again') || text.includes('다시 시도')) return requestMicrophone();
+
+  return; 
+}
+      if (screen === 'home') {
+        if (text.includes('history') || text.includes('기록') || text.includes('settings') || text.includes('설정')) return;
+        return startShowerTimer();
+      }
+      if (screen === 'active') return show('summary');
+      if (screen === 'reached') return show('summary');
+      if (screen === 'summary') return show('checkin');
+      if (screen === 'checkin') {
+        if (className.includes('state-card')) return;
+        return show('recommendation');
+      }
+    }
+    function bindScreen(doc, screen) {
+      doc.addEventListener('click', event => {
+        const element = event.target.closest('button, a, [role="button"], .cursor-pointer');
+        if (!element) return;
+        const buttons = [...doc.querySelectorAll('button')];
+        handleAction(screen, { id: element.id || '', className: element.className || '', text: element.innerText || '', buttonIndex: buttons.indexOf(element) });
+      });
+    }
+    function setupFrame(frame) {
+      if (frame.dataset.bound === 'true' || !frame.contentDocument?.body) return;
+      const screen = frame.closest('.screen').dataset.screen;
+      const doc = frame.contentDocument; localize(doc);
+      frame.dataset.bound = 'true';
+    }
+    document.querySelectorAll('iframe').forEach(frame => {
+      frame.addEventListener('load', () => setupFrame(frame));
+      queueMicrotask(() => setupFrame(frame));
+    });
+    window.addEventListener('message', event => {
+      if (event.data?.type !== 'shower-care:action') return;
+      const frame = [...document.querySelectorAll('iframe')].find(item => item.contentWindow === event.source);
+      if (!frame) return;
+      handleAction(frame.closest('.screen').dataset.screen, event.data.control);
+    });
+    const requested = location.hash.slice(1); if (order.includes(requested)) show(requested);
+  </script>
+</body>
+</html>
