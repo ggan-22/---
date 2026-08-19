@@ -1,0 +1,191 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Microphone Permission - Shower Care</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Injection -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6e797b",
+                        "secondary-fixed-dim": "#c3c7c5",
+                        "surface": "#f9f9ff",
+                        "primary-fixed": "#91f1fe",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#004f56",
+                        "secondary": "#5b5f5d",
+                        "primary-container": "#4fb3bf",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#466369",
+                        "on-secondary-fixed-variant": "#434846",
+                        "secondary-container": "#dadedb",
+                        "surface-variant": "#d8e3fb",
+                        "primary": "#006972",
+                        "surface-dim": "#cfdaf2",
+                        "inverse-surface": "#263143",
+                        "on-primary-container": "#004248",
+                        "surface-container-high": "#dee8ff",
+                        "on-background": "#111c2d",
+                        "outline-variant": "#bdc9ca",
+                        "on-primary-fixed": "#001f23",
+                        "tertiary-fixed": "#c9e8ef",
+                        "on-surface-variant": "#3e494a",
+                        "primary-fixed-dim": "#74d5e1",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#dfe3e1",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#2f4b51",
+                        "on-surface": "#111c2d",
+                        "on-tertiary-fixed": "#001f25",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9ff",
+                        "inverse-primary": "#74d5e1",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#5d6260",
+                        "on-tertiary-container": "#223f45",
+                        "inverse-on-surface": "#ecf1ff",
+                        "tertiary-fixed-dim": "#adccd3",
+                        "tertiary-container": "#8caab1",
+                        "surface-container-highest": "#d8e3fb",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#006972",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary-fixed": "#181d1b",
+                        "surface-container": "#e7eeff",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "24px",
+                        "container-margin": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "section-gap": "48px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-timer": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-caps": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-timer": ["80px", { "lineHeight": "96px", "letterSpacing": "-0.04em", "fontWeight": "300" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Lightweight atmospheric glow for the primary illustration */
+        .ambient-glow {
+            filter: drop-shadow(0 0 60px rgba(79, 179, 191, 0.3));
+        }
+
+        /* Sound wave ripple animations */
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: var(--start-opacity);
+            }
+            100% {
+                transform: scale(1.15);
+                opacity: 0;
+            }
+        }
+        
+        .ripple-inner {
+            --start-opacity: 0.5;
+            transform-origin: 50% 50%;
+            animation: ripple 2s infinite ease-out 0s both;
+        }
+        
+        .ripple-middle {
+            --start-opacity: 0.3;
+            transform-origin: 50% 50%;
+            animation: ripple 2s infinite ease-out 0.3s both;
+        }
+        
+        .ripple-outer {
+            --start-opacity: 0.1;
+            transform-origin: 50% 50%;
+            animation: ripple 2s infinite ease-out 0.6s both;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col overflow-x-hidden selection:bg-primary-container/30">
+<!-- TopAppBar (Transactional Context) -->
+<header class="bg-surface/60 backdrop-blur-xl fixed top-0 w-full z-50 flex items-center justify-between px-container-margin h-16 max-w-full">
+<a href="javascript:history.back()" aria-label="Go back" class="text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 flex items-center justify-center p-2 -ml-2 cursor-pointer inline-flex">
+  <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</a>
+<h1 class="font-headline-md text-headline-md font-semibold text-primary absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
+            Shower Care
+        </h1>
+<div class="w-10"></div> <!-- Balancing spacer -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-container-margin pt-[104px] pb-section-gap w-full max-w-2xl mx-auto">
+<!-- Primary Illustration -->
+<div class="w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center ambient-glow relative mb-stack-md">
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-3xl scale-125"></div>
+<svg class="w-full h-full relative z-10" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<!-- Central Microphone Silhouette -->
+<rect fill="#006972" height="32" rx="8" width="16" x="42" y="25"></rect>
+<path d="M 35 45 C 35 58 41 65 50 65 C 59 65 65 58 65 45" fill="none" stroke="#006972" stroke-linecap="round" stroke-width="5"></path>
+<line stroke="#006972" stroke-linecap="round" stroke-width="5" x1="50" x2="50" y1="65" y2="75"></line>
+<line stroke="#006972" stroke-linecap="round" stroke-width="5" x1="38" x2="62" y1="75" y2="75"></line>
+<!-- Layered Sound Wave Ripples (Symmetrical) -->
+<!-- Inner Ripples (0.5 opacity) -->
+<path class="ripple-inner" d="M 30 35 Q 22 48 30 61" opacity="0.5" stroke="#4fb3bf" stroke-linecap="round" stroke-width="3"></path>
+<path class="ripple-inner" d="M 70 35 Q 78 48 70 61" opacity="0.5" stroke="#4fb3bf" stroke-linecap="round" stroke-width="3"></path>
+<!-- Middle Ripples (0.3 opacity) -->
+<path class="ripple-middle" d="M 22 30 Q 10 48 22 66" opacity="0.3" stroke="#4fb3bf" stroke-linecap="round" stroke-width="2.5"></path>
+<path class="ripple-middle" d="M 78 30 Q 90 48 78 66" opacity="0.3" stroke="#4fb3bf" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Outer Ripples (0.1 opacity) -->
+<path class="ripple-outer" d="M 14 25 Q -2 48 14 71" opacity="0.1" stroke="#4fb3bf" stroke-linecap="round" stroke-width="2"></path>
+<path class="ripple-outer" d="M 86 25 Q 102 48 86 71" opacity="0.1" stroke="#4fb3bf" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Text Reassurance -->
+<div class="text-center flex flex-col items-center gap-stack-sm">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-stack-md">
+                물소리 감지를 허용해 주세요
+            </h2>
+<p class="font-body-md text-body-md md:font-body-lg md:text-body-lg text-on-surface-variant max-w-[320px] md:max-w-[420px]">샤워 시간을 기록하기 위해 물소리만 감지합니다. 소리는 기기에서만 처리되며 녹음하거나 저장하지 않습니다.</p>
+</div>
+<!-- Action Area -->
+<div class="w-full flex flex-col items-center gap-stack-sm mt-10">
+<a href="enhanced_home_measurement_standby_update_motion.html" class="w-full max-w-[340px] h-[56px] flex items-center justify-center bg-[#5fbdbd] text-on-primary-container font-headline-md text-headline-md rounded-full hover:bg-[#4ea8a8] active:bg-[#3d9393] active:scale-95 transition-all duration-200">
+  마이크 접근 허용
+</a>
+<a href="microphone_permission_denied.html" class="w-full max-w-[340px] h-[56px] flex items-center justify-center bg-transparent text-on-surface font-headline-md text-headline-md rounded-full hover:bg-surface-variant/50 active:scale-95 transition-all duration-200">
+  나중에 하기
+</a>
+</div>
+</main>
+
+
+<script src="../screen-bridge.js"></script></body></html>
