@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shower Care - Active Detection</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-surface": "#111c2d",
+                            "tertiary-fixed-dim": "#adccd3",
+                            "surface-variant": "#d8e3fb",
+                            "secondary-fixed-dim": "#c3c7c5",
+                            "surface-tint": "#006972",
+                            "inverse-on-surface": "#ecf1ff",
+                            "primary-fixed-dim": "#74d5e1",
+                            "on-error-container": "#93000a",
+                            "on-secondary-container": "#5d6260",
+                            "secondary": "#5b5f5d",
+                            "background": "#f9f9ff",
+                            "on-primary-container": "#004248",
+                            "tertiary-container": "#8caab1",
+                            "tertiary-fixed": "#c9e8ef",
+                            "tertiary": "#466369",
+                            "surface-container-high": "#dee8ff",
+                            "on-secondary-fixed-variant": "#434846",
+                            "secondary-fixed": "#dfe3e1",
+                            "on-secondary": "#ffffff",
+                            "on-primary-fixed": "#001f23",
+                            "outline-variant": "#bdc9ca",
+                            "error-container": "#ffdad6",
+                            "primary-fixed": "#91f1fe",
+                            "primary": "#006972",
+                            "surface-container-low": "#f0f3ff",
+                            "secondary-container": "#dadedb",
+                            "on-tertiary": "#ffffff",
+                            "on-background": "#111c2d",
+                            "surface-bright": "#f9f9ff",
+                            "surface-container-lowest": "#ffffff",
+                            "on-tertiary-container": "#223f45",
+                            "on-primary": "#ffffff",
+                            "on-error": "#ffffff",
+                            "inverse-primary": "#74d5e1",
+                            "primary-container": "#4fb3bf",
+                            "on-tertiary-fixed-variant": "#2f4b51",
+                            "surface-container": "#e7eeff",
+                            "surface": "#f9f9ff",
+                            "error": "#ba1a1a",
+                            "inverse-surface": "#263143",
+                            "surface-container-highest": "#d8e3fb",
+                            "on-tertiary-fixed": "#001f25",
+                            "on-primary-fixed-variant": "#004f56",
+                            "on-secondary-fixed": "#181d1b",
+                            "surface-dim": "#cfdaf2",
+                            "outline": "#6e797b",
+                            "on-surface-variant": "#3e494a"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "gutter": "16px",
+                            "card-padding": "24px",
+                            "stack-sm": "8px",
+                            "container-margin": "24px",
+                            "stack-md": "16px",
+                            "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                            "headline-lg": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "headline-lg-mobile": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "display-timer": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "headline-md": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "body-lg": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "body-md": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "label-caps": [
+                                    "Plus Jakarta Sans"
+                            ]
+                    },
+                    "fontSize": {
+                            "headline-lg": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "40px",
+                                            "letterSpacing": "-0.02em",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-lg-mobile": [
+                                    "28px",
+                                    {
+                                            "lineHeight": "36px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "display-timer": [
+                                    "80px",
+                                    {
+                                            "lineHeight": "96px",
+                                            "letterSpacing": "-0.04em",
+                                            "fontWeight": "300"
+                                    }
+                            ],
+                            "headline-md": [
+                                    "24px",
+                                    {
+                                            "lineHeight": "32px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "body-lg": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "28px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "body-md": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "24px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "label-caps": [
+                                    "12px",
+                                    {
+                                            "lineHeight": "16px",
+                                            "letterSpacing": "0.08em",
+                                            "fontWeight": "700"
+                                    }
+                            ]
+                    }
+            },
+                },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden relative">
+<!-- Procedural Background Shader -->
+<div class="absolute inset-0 z-0">
+<!-- STITCH_SHADER_START:ANIMATION_11 class="absolute inset-0 w-full h-full opacity-60" -->
+<div class="absolute inset-0 w-full h-full opacity-60" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_11" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_11');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Create multiple layered waves
+    float wave1 = sin(uv.x * 3.0 + u_time * 0.8) * 0.05;
+    float wave2 = sin(uv.x * 5.0 - u_time * 1.2) * 0.03;
+    float wave3 = cos(uv.y * 2.0 + u_time * 0.5) * 0.02;
+    
+    float finalWave = uv.y + wave1 + wave2 + wave3;
+    
+    // Base color: Pure Water White to Aqua Teal
+    vec3 colorA = vec3(0.976, 0.976, 1.0); // surface
+    vec3 colorB = vec3(0.31, 0.702, 0.749); // #4FB3BF brand aqua
+    
+    float mask = smoothstep(0.4, 0.7, finalWave);
+    vec3 finalColor = mix(colorB, colorA, mask);
+    
+    // Add some subtle "shimmer" particles
+    float shimmer = sin(uv.x * 20.0 + u_time * 2.0) * cos(uv.y * 20.0 - u_time * 1.5);
+    finalColor += shimmer * 0.02 * (1.0 - mask);
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_11 -->
+</div>
+<!-- Main Canvas -->
+<main class="relative z-10 flex flex-col items-center justify-center h-full w-full px-gutter">
+<!-- Status Indicator -->
+<div class="flex items-center space-x-2 mb-stack-md">
+<div class="w-2 h-2 rounded-full bg-primary-container pulse-dot"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase">물소리를 감지하고 있어요...</span>
+</div>
+<!-- The Ritual Timer -->
+<div class="text-center">
+  <h1 id="timer" class="font-display-timer text-display-timer text-on-surface tracking-tighter transition-colors duration-300">00:00</h1>
+</div>
+<!-- Ambient Glow around timer (optional, subtle) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#D2F1F8] rounded-full blur-[60px] opacity-20 pointer-events-none -z-10"></div>
+</main>
+<!-- Bottom Action -->
+<div class="absolute bottom-12 w-full flex justify-center z-20">
+<a role="button" id="finishShowerBtn" class="font-body-md text-body-md text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity duration-300 px-6 py-2 inline-block cursor-pointer">
+  샤워 마치기
+</a>
+</div>
+<script src="./screen-bridge.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const timerElement = document.getElementById('timer');
+    if (!timerElement) return;
+
+    let seconds = 0;
+
+    const timerInterval = setInterval(() => {
+      seconds++;
+      sessionStorage.setItem('shower_time', seconds);
+
+      const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const secs = String(seconds % 60).padStart(2, '0');
+
+      timerElement.textContent = `${mins}:${secs}`;
+
+      if (seconds >= 480) {
+        clearInterval(timerInterval);
+        window.location.href = 'target_reached_state.html?time=' + seconds;
+      }
+    }, 1000);
+  });
+
+  document.getElementById('finishShowerBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  if (typeof timerInterval !== 'undefined') {
+    clearInterval(timerInterval);
+  }
+
+  const currentSeconds = typeof showerSeconds !== 'undefined' ? showerSeconds : (parseInt(sessionStorage.getItem('shower_time'), 10) || 0);
+  sessionStorage.setItem('shower_time', currentSeconds);
+
+  const targetUrl = `refined_shower_result_summary.html?time=${currentSeconds}`;
+
+  if (window.ScreenBridge && typeof window.ScreenBridge.navigateTo === 'function') {
+    window.ScreenBridge.navigateTo(targetUrl);
+  } else {
+    window.location.href = targetUrl;
+  }
+});
+</script></body></html>
